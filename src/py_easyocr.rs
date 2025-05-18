@@ -72,7 +72,7 @@ pub struct EasyOcrRunArgs<'a> {
     pub cpus: u8,
     /// expect the result to be detailed
     /// returns bounding box based result or simple array of string
-    pub detailed: bool,
+    // pub detailed: bool,
     /// Combine result into paragraph
     pub paragraph: bool,
     // /// output format
@@ -85,7 +85,7 @@ impl Default for EasyOcrRunArgs<'_> {
         Self {
             decoder: "greedy",
             cpus: 0,
-            detailed: true,
+            // detailed: true,
             rotations: &[],
             // output_format: "standard",
             paragraph: false,
@@ -131,11 +131,11 @@ impl PyEasyOcr {
             decoder,
             rotations,
             cpus,
-            detailed,
+            // detailed,
             paragraph,
         } = args.unwrap_or_default();
 
-        let detail = if detailed { 1 } else { 0 };
+        // let _detail = if detailed { 1 } else { 0 };
         let decoder = match decoder {
             d if d == "beamsearch" || d == "wordbeamsearch" => d,
             _ => EasyOcrRunArgs::default().decoder,
@@ -143,7 +143,7 @@ impl PyEasyOcr {
 
         Python::with_gil(|py| {
             let kwargs = PyDict::new(py);
-            kwargs.set_item("detail", detail)?;
+            kwargs.set_item("detail", 1)?;
             kwargs.set_item("decoder", decoder)?;
             kwargs.set_item("rotation_info", PyList::new(py, rotations)?)?;
             kwargs.set_item("workers", cpus)?;
