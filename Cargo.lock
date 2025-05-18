@@ -1079,6 +1079,7 @@ name = "easyocr-rs"
 version = "0.1.0"
 dependencies = [
  "error-pile",
+ "image",
  "pyo3",
 ]
 
@@ -1191,12 +1192,13 @@ dependencies = [
 [[package]]
 name = "error-pile"
 version = "0.1.0"
-source = "git+https://github.com/Ram-Hotel-Management/error-pile.git#85deba7f816670c57d8f5e4d1bd0942c0e77b3a5"
+source = "git+https://github.com/Ram-Hotel-Management/error-pile.git#9a4663af2edf8cf5368f5f28b22fb1ac121d6095"
 dependencies = [
  "base64 0.22.1",
  "chrono",
  "graph-http",
  "graph-rs-sdk",
+ "image",
  "pdfium-render",
  "pyo3",
  "reqwest",

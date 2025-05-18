@@ -9,4 +9,5 @@ edition = "2024"
 [dependencies]
 pyo3 = { version = "0.25", features = ["auto-initialize"] }
 error-pile = { git = "https://github.com/Ram-Hotel-Management/error-pile.git" }
+image = "0.25.6"
 

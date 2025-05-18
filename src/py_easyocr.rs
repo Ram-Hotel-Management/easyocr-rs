@@ -1,7 +1,9 @@
 use error_pile::PileResult;
+use image::DynamicImage;
 
 use std::{
     env::temp_dir,
+    io::Cursor,
     path::PathBuf,
     sync::atomic::{AtomicBool, Ordering},
 };
@@ -157,5 +159,14 @@ impl PyEasyOcr {
 
             Ok(result.into())
         })
+    }
+
+    pub fn run_img(&self, img: &DynamicImage, args: Option<EasyOcrRunArgs>) -> PileResult<OCRData> {
+        // Convert DynamicImage to bytes
+        let mut img_bytes = Vec::new();
+
+        img.write_to(&mut Cursor::new(&mut img_bytes), image::ImageFormat::Png)?;
+
+        self.run(&img_bytes, args)
     }
 }
