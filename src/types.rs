@@ -59,7 +59,7 @@ impl From<Detail1> for OCRData {
 
 #[derive(Debug, Clone)]
 pub struct OCRData {
-    pub(crate) texts: Vec<DetectedText>,
+    pub texts: Vec<DetectedText>,
 }
 
 impl OCRData {
