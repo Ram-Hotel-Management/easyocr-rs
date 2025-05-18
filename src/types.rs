@@ -33,14 +33,14 @@ pub struct DetectedText {
 }
 
 /// Represents the simplest form the EasyOcr can return data
-pub(crate) type Detail0 = Vec<String>;
+pub type Detail0 = Vec<String>;
 
 /// Represents the Detected Text in the Image
 /// 0: Bounding Box - [[189, 75], [469, 75], [469, 165], [189, 165]]
 /// 1: The text detected
 /// 2: The confidence score - returns a result between 0 - 1
 /// Full example: ([[189, 75], [469, 75], [469, 165], [189, 165]], 'Text', 0.3754989504814148)
-pub(crate) type Detail1 = Vec<(EasyOcrBBox, String, f32)>;
+pub type Detail1 = Vec<(EasyOcrBBox, String, f32)>;
 
 impl From<Detail1> for OCRData {
     fn from(value: Detail1) -> Self {
