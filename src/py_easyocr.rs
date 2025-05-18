@@ -61,7 +61,7 @@ pub struct PyEasyOcr {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-pub struct DoclingRunArgs<'a> {
+pub struct EasyOcrRunArgs<'a> {
     /// "greedy", 'beamsearch', 'wordbeamsearch'
     pub decoder: &'a str,
     /// apply these rotations and returns the one with best confidence score
@@ -78,7 +78,7 @@ pub struct DoclingRunArgs<'a> {
     // pub output_format: &'a str,
 }
 
-impl Default for DoclingRunArgs<'_> {
+impl Default for EasyOcrRunArgs<'_> {
     fn default() -> Self {
         Self {
             decoder: "greedy",
@@ -124,8 +124,8 @@ impl PyEasyOcr {
     }
 
     /// runs an inference on the provided bytes
-    pub fn run(&self, bytes: &[u8], args: Option<DoclingRunArgs>) -> PileResult<OCRData> {
-        let DoclingRunArgs {
+    pub fn run(&self, bytes: &[u8], args: Option<EasyOcrRunArgs>) -> PileResult<OCRData> {
+        let EasyOcrRunArgs {
             decoder,
             rotations,
             cpus,
@@ -136,7 +136,7 @@ impl PyEasyOcr {
         let detail = if detailed { 1 } else { 0 };
         let decoder = match decoder {
             d if d == "beamsearch" || d == "wordbeamsearch" => d,
-            _ => DoclingRunArgs::default().decoder,
+            _ => EasyOcrRunArgs::default().decoder,
         };
 
         Python::with_gil(|py| {

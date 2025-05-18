@@ -1,4 +1,4 @@
-use easyocr_rs::{DoclingRunArgs, PyEasyOcr};
+use easyocr_rs::{EasyOcrRunArgs, PyEasyOcr};
 
 #[test]
 fn is_runnable() {
@@ -7,7 +7,7 @@ fn is_runnable() {
     let res = easy_ocr
         .run(
             bytes,
-            Some(DoclingRunArgs {
+            Some(EasyOcrRunArgs {
                 rotations: &[90, 180, 270],
                 ..Default::default()
             }),
