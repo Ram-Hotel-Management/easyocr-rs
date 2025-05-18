@@ -1,3 +1,5 @@
+use error_pile::PileResult;
+
 use std::{
     env::temp_dir,
     path::PathBuf,
@@ -9,10 +11,7 @@ use pyo3::{
     types::{PyAnyMethods, PyBytes, PyDict, PyList},
 };
 
-use crate::{
-    EasyOcrResult,
-    types::{Detail1, OCRData},
-};
+use crate::types::{Detail1, OCRData};
 
 /// CRAFT Model neeeded for easy ocr
 const CRAFT_MODEL_NAME: &str = "craft_mlt_25k.pth";
@@ -25,7 +24,7 @@ static IS_WRITTEN: AtomicBool = AtomicBool::new(false);
 /// Write the .pth files to the temp dir
 /// this will eliminate the model needing to download the necessary
 /// pytorch files
-fn write_pth_files() -> EasyOcrResult<PathBuf> {
+fn write_pth_files() -> PileResult<PathBuf> {
     let version = env!("CARGO_PKG_VERSION");
     let temp_dir = temp_dir().join(format!("easyocr-models-v{}", version));
 
@@ -94,7 +93,7 @@ impl Default for DoclingRunArgs<'_> {
 
 impl PyEasyOcr {
     /// Creates an instanc
-    pub fn new(use_gpu: bool) -> EasyOcrResult<Self> {
+    pub fn new(use_gpu: bool) -> PileResult<Self> {
         // need to write the .pth files to continue
         let p = write_pth_files()?;
         Python::with_gil(|py| {
@@ -125,7 +124,7 @@ impl PyEasyOcr {
     }
 
     /// runs an inference on the provided bytes
-    pub fn run(&self, bytes: &[u8], args: Option<DoclingRunArgs>) -> EasyOcrResult<OCRData> {
+    pub fn run(&self, bytes: &[u8], args: Option<DoclingRunArgs>) -> PileResult<OCRData> {
         let DoclingRunArgs {
             decoder,
             rotations,
