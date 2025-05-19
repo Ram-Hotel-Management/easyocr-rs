@@ -1192,7 +1192,7 @@ dependencies = [
 [[package]]
 name = "error-pile"
 version = "0.1.0"
-source = "git+https://github.com/Ram-Hotel-Management/error-pile.git#9a4663af2edf8cf5368f5f28b22fb1ac121d6095"
+source = "git+https://github.com/Ram-Hotel-Management/error-pile.git#430e0228830b3becd9c64dbdf1c1dd229ef9b805"
 dependencies = [
  "base64 0.22.1",
  "chrono",
